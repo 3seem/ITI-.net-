@@ -1,0 +1,38 @@
+﻿@* @model List<Student> *@
+@model (string Owner, string StampA, string StampB) //part E
+@{
+    // Build Number = 27×7 + 100 = 289
+    ViewData["Title"] = "Student Portal — Build #289";
+}
+
+@* part E *@
+<p>Owner: @Model.Owner | Stamp A: @Model.StampA | Stamp B: @Model.StampB</p>
+
+
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <h1>Student Portal — Build #289</h1>
+    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Full Name</th>
+            <th>Year</th>
+            <th>GPA</th>
+        </tr>
+    </thead>
+    @* <tbody> *@
+        @* TODO 7's foreach loop goes here — one <tr> per student. *@
+        @* @foreach (var student in Model) *@
+        @* { *@
+            @* <tr> *@
+                @* <td>@student.FullName</td> *@
+                @* <td>@student.YearOfStudy</td> *@
+                @* <td>@student.Gpa.ToString("F2")</td> *@
+            @* </tr> *@
+        @* } *@
+    @* </tbody> *@
+
+</table>
