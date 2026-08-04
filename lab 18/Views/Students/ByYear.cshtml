@@ -1,0 +1,34 @@
+@model List<Student>
+@*
+    Views/Students/ByYear.cshtml — PRE-TYPED, NOT TODAY'S TOPIC.
+*@
+@{
+    ViewData["Title"] = "Students by Year";
+}
+
+<h1 class="display-5">Year @ViewData["Year"] Students</h1>
+<p class="lead">Reached through the route pattern <code>students/year/{year:int:range(1,4)}</code>.</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Full Name</th>
+            <th>Year</th>
+            <th>GPA</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var student in Model)
+        {
+            @* Part B *@
+            <partial name="_StudentRow" model="student" />
+
+   @*If <partial name="_StudentRow" /> were called here with no model attribute, it would
+   inherit this page's Model — which inside this foreach is the whole List<Student>,
+   not a single Student *@
+        }
+    </tbody>
+</table>
+
+<a href="/students">Back to all students</a>
