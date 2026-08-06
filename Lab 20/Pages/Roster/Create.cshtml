@@ -1,0 +1,36 @@
+﻿@* Part C 1 *@
+@page
+@model StudentPortalWeb.Pages.Roster.CreateModel
+@{
+
+}
+
+<h2>Add Student</h2>
+@* Part C 2 *@
+<div asp-validation-summary="All" class="text-danger"></div>
+
+@* Part C 3 *@
+<div class="row">
+<form method="post">
+    <div class="mb-3">
+        <label asp-for="Student.FullName"></label>
+        <input asp-for="Student.FullName" class="form-control" />
+        <span asp-validation-for="Student.FullName" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Student.YearOfStudy"></label>
+        <input asp-for="Student.YearOfStudy" class="form-control" />
+        <span asp-validation-for="Student.YearOfStudy" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Student.Gpa"></label>
+        <input asp-for="Student.Gpa" class="form-control" />
+        <span asp-validation-for="Student.Gpa" class="text-danger"></span>
+    </div>
+        @* Part C 4 *@
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-page="./Index" class="btn btn-secondary">Back to Roster</a>
+</form>
+</div>

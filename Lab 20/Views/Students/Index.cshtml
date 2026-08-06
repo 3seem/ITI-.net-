@@ -1,0 +1,57 @@
+@model List<Student>
+@{
+    ViewData["Title"] = "Students";
+}
+
+@*  Session 17's confirmation banner — unchanged. TempData survives
+    exactly one redirect and is then thrown away, which is why this
+    appears once after saving and never on a refresh.  *@
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success">@TempData["Message"]</div>
+}
+
+<h1 class="display-5">All Students</h1>
+<p class="lead">Reached through the route pattern <code>students</code>.</p>
+
+@{
+    var studentCount = Model.Count();
+    var averageGpa = Model.Any() ? Model.Average(s => s.Gpa) : 0.0;
+}
+
+@if (studentCount > 0)
+{
+    <p>
+        <strong>@studentCount</strong> students on the roster , average Gpa
+        <strong>@averageGpa.ToString("F2")</strong>
+    </p>
+}
+else
+{
+    <p class="text-muted">No students yet. Add the first one below.</p>
+}
+
+<p><a class="btn btn-primary" asp-controller="Students" asp-action="Create">+ Add a Student</a></p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Full Name</th>
+            <th>Year</th>
+            <th>GPA</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var student in Model)
+        {
+            @* <tr>
+                <td>@student.Id</td>
+                <td><a href="/students/@student.Id">@student.FullName</a></td>
+                <td>@student.YearOfStudy</td>
+                <td>@student.Gpa.ToString("F2")</td>
+            </tr> *@
+            <partial name="_StudentRow" model="student" />
+        }
+    </tbody>
+</table>

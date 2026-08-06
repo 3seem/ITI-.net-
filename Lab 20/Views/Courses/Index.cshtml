@@ -1,0 +1,31 @@
+@model List<Course>
+@{
+    ViewData["Title"] = "Courses";
+}
+
+<h1 class="display-5">All Courses</h1>
+<p class="lead">The other end of today's relationship — reached at <code>/Courses</code>.</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Course Name</th>
+            <th>Credits</th>
+            <th>Instructor</th>
+            <th>Students Enrolled</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var course in Model)
+        {
+            <tr>
+                <td>@course.Id</td>
+                <td><a asp-controller="Courses" asp-action="Details" asp-route-id="@course.Id">@course.CourseName</a></td>
+                <td>@course.Credits</td>
+                <td>@course.Instructor.FullName</td>
+                <td>@course.Enrollments.Count</td>
+            </tr>
+        }
+    </tbody>
+</table>

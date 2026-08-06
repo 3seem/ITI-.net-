@@ -1,0 +1,53 @@
+﻿@page "{id:int}"
+@model StudentPortalWeb.Pages.Roster.DetailsModel
+@{
+    ViewData["Title"] = "Student Details (Razor Page)";
+}
+<h1 class="display-5">@Model.Student!.FullName</h1>
+<table class="table">
+    <tr><th>Id</th><td>@Model.Student.Id</td></tr>
+    <tr><th>Full Name</th><td>@Model.Student.FullName</td></tr>
+    <tr><th>Year of Study</th><td>@Model.Student.YearOfStudy</td></tr>
+    <tr><th>GPA</th><td>@Model.Student.Gpa.ToString("F2")</td></tr>
+</table>
+
+<h4>Enrolled Courses</h4>
+@if (!Model.Student.Enrollments.Any())
+{
+    <p class="text-muted">Not Enrolled in any Courses yet</p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Course</th>
+                <th>Enrolled On</th>
+                <th>Grade</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var enrollment in Model.Student.Enrollments)
+            {
+                <tr>
+                    <td>@enrollment.Course.CourseName</td>
+                    <td>@enrollment.EnrollmentDate.ToString("yyyy-MM-dd")</td>
+                    <td>
+                        @if (enrollment.Grade.HasValue)
+                        {
+                            <gpa-badge for="@enrollment.Grade.Value" />
+                        }
+                        else
+                        {
+                            <span class="badge bg-light text-dark">Not yet graded</span>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<a asp-page="/Roster/Index">Back to the roster</a>
+<a asp-controller="Students" asp-action="Details" asp-route-id="@Model.Student.Id">The same student (MVC)</a>
+

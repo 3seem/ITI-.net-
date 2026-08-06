@@ -1,0 +1,7 @@
+@model Student
+<tr>
+    <td>@Model.Id</td>
+    <td><a asp-controller="Students" asp-action="Details" asp-route-id="@Model.Id">@Model.FullName</a></td>
+    <td>@Model.YearOfStudy</td>
+    <td><gpa-badge for = "@Model.Gpa"/></td>
+</tr>

@@ -1,0 +1,42 @@
+﻿@page
+@model StudentPortalWeb.Pages.Roster.IndexModel
+@{
+    ViewData["Title"] = "Roster";
+}
+@* Part C 5 *@
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success">@TempData["Message"]</div>
+}
+
+
+<h1 class="display-5">Student Roster</h1>
+<p class="lead">
+    The same rows as <code>/students</code> served by a razor page at
+    <code>/Roster</code> No Controller , no Route Entry , no new query
+</p>
+<p><a class="btn btn-primary" asp-page="./Create" >+ Add a Student</a></p>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Full Name</th>
+            <th>Year</th>
+            <th>GPA</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var student in Model.Students)
+        {
+            <tr>
+                <td>@student.Id</td>
+                <td><a asp-page="/Roster/Details" asp-route-id="@student.Id">@student.FullName</a></td>
+                <td>@student.YearOfStudy</td>
+                <td><gpa-badge for="@student.Gpa" /></td>
+            </tr>
+            @* <partial name="_StudentRow" model="student" /> *@
+        }
+    </tbody>
+</table>
+
+<a asp-controller="Students" asp-action="Index">roster in the MVC way</a>
